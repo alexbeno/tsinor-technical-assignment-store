@@ -1,5 +1,6 @@
 import { JSONObject } from "../src/json-types";
-import { Permission, Restrict, Store } from "../src/store";
+import { Restrict, Store } from "../src/store";
+import { Permission } from "../src/Helpers/Ability";
 import { UserStore } from "../src/userStore";
 import { AdminStore } from "./../src/adminStore";
 import { lazy } from "../src/lazy";
@@ -327,9 +328,7 @@ describe("Test Store - Permission Inheritance", () => {
     }
     class ChildStore extends ParentStore {}
     const baseChildStore = new ChildStore();
-    const nestedChildStore = baseChildStore.read(
-      "parentProp:parentProp:parentProp"
-    ) as Store;
+    const nestedChildStore = baseChildStore.read("parentProp:parentProp:parentProp") as Store;
     expect(nestedChildStore).toBeInstanceOf(ChildStore);
     expect(baseChildStore.allowedToWrite("parentProp")).toBe(false);
     expect(nestedChildStore.allowedToWrite("parentProp")).toBe(false);

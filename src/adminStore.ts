@@ -5,9 +5,9 @@ const credentialStore = new Store();
 credentialStore.writeEntries({ username: "user1" });
 
 export class AdminStore extends Store {
-  @Restrict("r")
+  @Restrict("rw")
   public user: UserStore;
-  @Restrict()
+  @Restrict("none")
   name: string = "John Doe";
   @Restrict("rw")
   getCredentials = (): Store => {
